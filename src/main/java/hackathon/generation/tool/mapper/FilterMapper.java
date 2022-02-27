@@ -57,6 +57,9 @@ public final class FilterMapper {
                 return field.lt(firstElementValue);
             }
             case BETWEEN: {
+                if(filter.getValues().size() < 2) {
+                    throw new BuildQueryException("Operation BETWEEN is not possible, because you do have not two values");
+                }
                 return field.between(firstElementValue, filter.getValues().get(1));
             }
             case CONTAINS: {
